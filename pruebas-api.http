@@ -1,0 +1,39 @@
+@host = http://127.0.0.1:8000/api
+
+### 1. Listar comercios
+GET {{host}}/comercios
+Accept: application/json
+
+### 2. Ver detalle de un comercio con sus transacciones
+GET {{host}}/comercios/1
+Accept: application/json
+
+### 3. Listar transacciones (con o sin filtro de estado del reto)
+GET {{host}}/transacciones?estado=Completada
+Accept: application/json
+
+### 4. Crear transacción con datos válidos
+POST {{host}}/transacciones
+Accept: application/json
+Content-Type: application/json
+
+{
+    "comercio_id": 1,
+    "cliente_nombre": "Luis Mena",
+    "monto": 25.50,
+    "estado": "Iniciada"
+}
+
+### 5. Crear transacción con datos inválidos (para error 422)
+POST {{host}}/transacciones
+Accept: application/json
+Content-Type: application/json
+
+{
+    "comercio_id": 1,
+    "monto": -5
+}
+
+### 6. Eliminar una transacción
+DELETE {{host}}/transacciones/1
+Accept: application/json
